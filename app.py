@@ -17,7 +17,7 @@ CORS(app)
 # lang='en' for English support
 # show_log argument is removed as it caused errors
 print("Loading PaddleOCR...")
-ocr = PaddleOCR(use_angle_cls=True, lang='en')
+ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False)
 print("PaddleOCR Loaded!")
 
 def group_boxes_into_lines(result, y_threshold=10):

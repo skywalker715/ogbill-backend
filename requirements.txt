@@ -1,7 +1,7 @@
 flask
 flask-cors
 paddlepaddle
-paddleocr
+paddleocr==2.7.3
 opencv-python-headless
 gunicorn
 numpy
