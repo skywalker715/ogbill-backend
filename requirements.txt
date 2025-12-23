@@ -4,4 +4,4 @@ paddlepaddle
 paddleocr==2.7.3
 opencv-python-headless
 gunicorn
-numpy
+numpy<2
