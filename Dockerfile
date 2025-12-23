@@ -18,11 +18,7 @@ COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt && \
-    python3 - <<'PY'
-from paddleocr import PaddleOCR
-PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False,
-          det_model_dir='det_lite', rec_model_dir='rec_lite', cls_model_dir='cls_lite')
-PY
+    python3 -c "from paddleocr import PaddleOCR; PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False, det_model_dir='det_lite', rec_model_dir='rec_lite', cls_model_dir='cls_lite')"
 
 # Copy application code
 COPY . .
