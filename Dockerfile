@@ -17,7 +17,8 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    python - <<'PY'\nfrom paddleocr import PaddleOCR\nPaddleOCR(use_angle_cls=True, lang='en', use_gpu=False,\n          det_model_dir='det_lite', rec_model_dir='rec_lite', cls_model_dir='cls_lite')\nPY
 
 # Copy application code
 COPY . .
@@ -25,5 +26,5 @@ COPY . .
 # Expose port (Railway will set PORT env var)
 EXPOSE 8080
 
-# Start command
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
+# Start command with reduced workers and threads
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "2", "app:app"]

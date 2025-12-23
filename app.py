@@ -3,6 +3,7 @@ import base64
 import collections
 import io
 import cv2
+cv2.setNumThreads(0)
 import numpy as np
 import traceback
 from flask import Flask, request, jsonify
@@ -17,7 +18,10 @@ CORS(app)
 # lang='en' for English support
 # show_log argument is removed as it caused errors
 print("Loading PaddleOCR...")
-ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False)
+ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False,
+    det_model_dir='det_lite',
+    rec_model_dir='rec_lite',
+    cls_model_dir='cls_lite')
 print("PaddleOCR Loaded!")
 
 def group_boxes_into_lines(result, y_threshold=10):
